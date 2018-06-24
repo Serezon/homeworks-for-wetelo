@@ -1,0 +1,6 @@
+1. { age: { $gte: 15, $lte: 20 } }
+2. { name: { $in: ["Іван", "Богдан", "Василь"] } , $or: [ {hobbies: { $size: 4 }}, {hobbies: { $size: 2 }} ] }
+3. {'hobbies.2': {$exists: true}}
+4. {"email" : {$regex : ".*@ukr.net.*"}}
+5. { hobbies: { $exists: false } }
+6. { email: { $eq: null } }
