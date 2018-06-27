@@ -13,7 +13,7 @@ function load(req, res, next, id) {
 }
 
 /**
- * Get user
+ * Get role
  * @returns {Role}
  */
 function get(req, res) {
@@ -21,10 +21,8 @@ function get(req, res) {
 }
 
 /**
- * Create new user
- * @property {string} req.body.username - The username of user.
- * @property {string} req.body.mobileNumber - The mobileNumber of user.
- * @returns {User}
+ * Create new role
+ * @returns {Role}
  */
 function create(req, res, next) {
   const role = new Role({

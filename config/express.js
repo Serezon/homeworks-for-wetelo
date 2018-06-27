@@ -1,5 +1,6 @@
 const express = require('express');
 const logger = require('morgan');
+var path = require('path');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const compress = require('compression');
@@ -13,6 +14,8 @@ const winstonInstance = require('./winston');
 const routes = require('../index.route');
 const config = require('./config');
 const APIError = require('../server/helpers/APIError');
+const multer = require('multer');
+const upload = multer({dest: 'uploads/'});
 
 const app = express();
 
@@ -45,6 +48,11 @@ if (config.env === 'development') {
     colorStatus: true // Color the status code (default green, 3XX cyan, 4XX yellow, 5XX red).
   }));
 }
+
+app.get('/send-image', (req, res) => {
+  res.sendFile('form.html', { root: path.join('__dirname', '../server/views')});
+});
+
 
 // mount all routes on /api path
 app.use('/api', routes);

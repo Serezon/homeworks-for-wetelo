@@ -22,8 +22,6 @@ function get(req, res) {
 
 /**
  * Create new category
- * @property {string} req.body.categoryname - The categoryname of category.
- * @property {string} req.body.mobileNumber - The mobileNumber of category.
  * @returns {Category}
  */
 function create(req, res, next) {
@@ -41,8 +39,6 @@ function create(req, res, next) {
 
 /**
  * Update existing category
- * @property {string} req.body.categoryname - The categoryname of category.
- * @property {string} req.body.mobileNumber - The mobileNumber of category.
  * @returns {Category}
  */
 function update(req, res, next) {
@@ -59,8 +55,8 @@ function update(req, res, next) {
 
 /**
  * Get category list.
- * @property {number} req.query.skip - Number of categorys to be skipped.
- * @property {number} req.query.limit - Limit number of categorys to be returned.
+ * @property {number} req.query.skip - Number of categories to be skipped.
+ * @property {number} req.query.limit - Limit number of categories to be returned.
  * @returns {Category[]}
  */
 function list(req, res, next) {

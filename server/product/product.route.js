@@ -2,27 +2,52 @@ const express = require('express');
 const validate = require('express-validation');
 const paramValidation = require('../../config/param-validation');
 const productCtrl = require('./product.controller');
+const multer = require('multer');
+const storage = multer.diskStorage({
+  destination: (req, file,cb) => {
+    cb(null, './uploads/');
+  },
+  filename: (req, file,cb) => {
+    cb(null, new Date().toISOString() + file.originalname);
+  }
+});
+const fileFilter = (req, file, cb) => {
+  if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
+  cb(null, true);
+  } else {
+    cb(null, false);
+  }
+};
+const upload = multer({
+  storage: storage, 
+  limits: {
+  fileSize: 1024 * 1024 * 5
+  },
+  fileFilter: fileFilter
+});
 
 const router = express.Router(); // eslint-disable-line new-cap
 
 router.route('/')
-  /** GET /api/users - Get list of users */
+  /** GET /api/products - Get list of products */
   .get(productCtrl.list)
 
-  /** POST /api/users - Create new user */
-  .post(validate(paramValidation.createProduct), productCtrl.create);
+  /** POST /api/products - Create new product */
+  .post( upload.single('image'), 
+  validate(paramValidation.updateProduct),
+  productCtrl.create);
 
 router.route('/:productId')
-  /** GET /api/users/:userId - Get user */
+  /** GET /api/products/:productId - Get product */
   .get(productCtrl.get)
 
-  /** PUT /api/users/:userId - Update user */
+  /** PUT /api/products/:productId - Update product */
   .put(validate(paramValidation.updateProduct), productCtrl.update)
 
-  /** DELETE /api/users/:userId - Delete user */
+  /** DELETE /api/products/:productId - Delete product */
   .delete(productCtrl.remove);
 
-/** Load user when API with userId route parameter is hit */
+/** Load product when API with productId route parameter is hit */
 router.param('productId', productCtrl.load);
 
 module.exports = router;

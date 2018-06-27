@@ -17,9 +17,9 @@ const ProductSchema = new mongoose.Schema({
     ref: 'Category',
     required: true
   },
-  images: {
-    type: Array,
-    default: ['']
+  image: {
+    type: String,
+    default: ''
   },
   code: {
     type: Number,
@@ -27,7 +27,8 @@ const ProductSchema = new mongoose.Schema({
   },
   price: {
     type: Object,
-    required: true
+    required: true,
+    default: {}
   },
   available: {
     type: Boolean,
@@ -61,7 +62,7 @@ const ProductSchema = new mongoose.Schema({
 /**
  * Methods
  */
-// UserSchema.method({
+// ProductSchema.method({
 // });
 
 /**
@@ -71,7 +72,7 @@ ProductSchema.statics = {
   /**
    * Get product
    * @param {ObjectId} id - The objectId of product.
-   * @returns {Promise<User, APIError>}
+   * @returns {Promise<Product, APIError>}
    */
   get(id) {
     return this.findById(id)
@@ -87,10 +88,10 @@ ProductSchema.statics = {
   },
 
   /**
-   * List products in descending order of 'createdAt' timestamp.
+   * List products in descending order of 'order'.
    * @param {number} skip - Number of products to be skipped.
    * @param {number} limit - Limit number of products to be returned.
-   * @returns {Promise<User[]>}
+   * @returns {Promise<Product[]>}
    */
   list({ skip = 0, limit = 50 } = {}) {
     return this.find({available: true})

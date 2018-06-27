@@ -10,7 +10,6 @@ router.route('/')
   .get(roleCtrl.list)
 
   /** POST /api/role - Create new role */
-  // .post(validate(paramValidation.createRole), roleCtrl.create);
   .post(validate(paramValidation.createRole), roleCtrl.create);
 
 router.route('/:roleId')
@@ -19,7 +18,6 @@ router.route('/:roleId')
 
   /** PUT /api/role/:roleId - Update role */
   .put(validate(paramValidation.updateRole), roleCtrl.update)
-  // .put(roleCtrl.update)
 
   /** DELETE /api/role/:roleId - Delete role */
   .delete(roleCtrl.remove);

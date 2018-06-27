@@ -43,9 +43,9 @@ RoleSchema.method({
  */
 RoleSchema.statics = {
   /**
-   * Get user
-   * @param {ObjectId} id - The objectId of user.
-   * @returns {Promise<User, APIError>}
+   * Get role
+   * @param {ObjectId} id - The objectIdrole.
+   * @returns {Promise<Role, APIError>}
    */
   get(id) {
     return this.findById(id)
@@ -60,10 +60,10 @@ RoleSchema.statics = {
   },
 
   /**
-   * List users in descending order of 'createdAt' timestamp.
-   * @param {number} skip - Number of users to be skipped.
-   * @param {number} limit - Limit number of users to be returned.
-   * @returns {Promise<User[]>}
+   * List roles in descending order of 'name'.
+   * @param {number} skip - Number of roles to be skipped.
+   * @param {number} limit - Limit number of roles to be returned.
+   * @returns {Promise<Role[]>}
    */
   list({ skip = 0, limit = 50 } = {}) {
     return this.find()

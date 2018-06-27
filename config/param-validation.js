@@ -80,7 +80,7 @@ module.exports = {
     body: {
       name: Joi.string().required(),
       category: Joi.objectId().required(),
-      images: Joi.array().required(),
+      image: Joi.string(),
       code: Joi.number().required(),
       price: Joi.object().required(),
       available: Joi.boolean().required(),
@@ -95,7 +95,7 @@ module.exports = {
     body: {
       name: Joi.string().required(),
       category: Joi.objectId().required(),
-      images: Joi.array().required(),
+      image: Joi.string(),
       code: Joi.number().required(),
       price: Joi.object().required(),
       available: Joi.boolean().required(),
@@ -105,7 +105,7 @@ module.exports = {
       order: Joi.number()
     },
     params: {
-      productId: Joi.string().hex().required()
+      productId: Joi.string().hex()
     }
   }
 

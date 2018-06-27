@@ -60,7 +60,7 @@ CategorySchema.statics = {
   },
 
   /**
-   * List categories in descending order of 'createdAt' timestamp.
+   * List categories in descending order of 'order'.
    * @param {number} skip - Number of categories to be skipped.
    * @param {number} limit - Limit number of categories to be returned.
    * @returns {Promise<Category[]>}

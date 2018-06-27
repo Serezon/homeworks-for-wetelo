@@ -21,19 +21,12 @@ function get(req, res) {
   return res.json(req.product);
 }
 
-/**
- * Create new product
- * @property {string} req.body.username - The username of user.
- * @property {string} req.body.mobileNumber - The mobileNumber of user.
- * @returns {User}
- */
+
 function create(req, res, next) {
   const product = new Product({
     name: req.body.name,
-    // category: ( () => 
-    //   Category.find({name: req.body.category}).id )(),
     category: req.body.category,
-    images: req.body.images,
+    image: req.file.path,
     code: req.body.code,
     price: req.body.price,
     available: req.body.available,
@@ -48,19 +41,12 @@ function create(req, res, next) {
     .catch(e => next(e));
 }
 
-/**
- * Update existing user
- * @property {string} req.body.username - The username of user.
- * @property {string} req.body.mobileNumber - The mobileNumber of user.
- * @returns {User}
- */
+
 function update(req, res, next) {
   const product = req.product;
   product.name = req.body.name;
-  // product.category = ( () => 
-  //   Category.find({name: req.body.category}).id )();
   product.category - req.body.category;
-  product.images = req.body.images;
+  product.image = req.file.path;
   product.code = req.body.code;
   product.price = req.body.price;
   product.available = req.body.available;
@@ -74,12 +60,6 @@ function update(req, res, next) {
     .catch(e => next(e));
 }
 
-/**
- * Get user list.
- * @property {number} req.query.skip - Number of users to be skipped.
- * @property {number} req.query.limit - Limit number of users to be returned.
- * @returns {User[]}
- */
 function list(req, res, next) {
   const { limit = 50, skip = 0 } = req.query;
   Product.list({ limit, skip })
@@ -88,8 +68,8 @@ function list(req, res, next) {
 }
 
 /**
- * Delete user.
- * @returns {User}
+ * Delete prudct.
+ * @returns {Product}
  */
 function remove(req, res, next) {
   const product = req.product;
