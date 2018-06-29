@@ -1,4 +1,6 @@
 const User = require('./user.model');
+const bcrypt = require('bcrypt');
+const httpStatus = require('http-status');
 
 /**
  * Load user and append to req.
@@ -22,16 +24,11 @@ function get(req, res) {
 
 /**
  * Create new user
- * @property {string} req.body.username - The username of user.
- * @property {string} req.body.mobileNumber - The mobileNumber of user.
  * @returns {User}
  */
 function create(req, res, next) {
-  const user = new User({
-    username: req.body.username,
-    mobileNumber: req.body.mobileNumber
-  });
-
+  const user = new User(req.body);
+  
   user.save()
     .then(savedUser => res.json(savedUser))
     .catch(e => next(e));
@@ -39,14 +36,12 @@ function create(req, res, next) {
 
 /**
  * Update existing user
- * @property {string} req.body.username - The username of user.
- * @property {string} req.body.mobileNumber - The mobileNumber of user.
  * @returns {User}
  */
 function update(req, res, next) {
   const user = req.user;
-  user.username = req.body.username;
-  user.mobileNumber = req.body.mobileNumber;
+  user.email = req.body.email;
+  user.password = req.body.password;
 
   user.save()
     .then(savedUser => res.json(savedUser))

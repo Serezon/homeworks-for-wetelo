@@ -3,8 +3,7 @@ const userRoutes = require('./server/user/user.route');
 const authRoutes = require('./server/auth/auth.route');
 const roleRoutes = require('./server/role/role.route');
 const categoryRoutes = require('./server/category/category.route');
-const productRoutes = require('./server/product/product.route')
-//const formImage = require('./server/views/form.html');
+const productRoutes = require('./server/product/product.route');
 
 const router = express.Router(); // eslint-disable-line new-cap
 
@@ -29,7 +28,5 @@ router.use('/category', categoryRoutes);
 
 // mount product routes at /product
 router.use('/product', productRoutes);
-
-
 
 module.exports = router;
