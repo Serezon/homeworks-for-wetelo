@@ -43,8 +43,8 @@ function login(req, res, next) {
       }
       if (result) {
         const token = jwt.sign({
-          email: user.email
-        }, config.jwtSecret);
+          email: user[0].email
+        }, config.jwtSecret,{ expiresIn: '1d' });
         return res.json({
           token,
           email: user.email
